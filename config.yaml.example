@@ -1,0 +1,19 @@
+OTRSConnection:
+  Host: 1.2.3.4
+  Port: 1234
+  UserName: user
+  Password: password
+  DBName: otrs
+  SSLMode: disable
+Web:
+  Port: 9090
+UserList:
+    - LastName: Иванов
+      WorkShift: M
+      Command: 1
+    - LastName: Петров
+      WorkShift: M
+      Command: 1
+    - LastName: Сидоров
+      WorkShift: M
+      Command: 1

@@ -1,0 +1,75 @@
+{{define "head"}}
+    <style>
+        hr{ border: 1px #ccc dashed;}
+        .themed-grid-col{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(86, 61, 124, .15);
+            border: 1px solid rgba(86, 61, 124, .2);
+        }
+        .bad-grid-col{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(200, 61, 61, .15);
+            border: 1px solid rgba(200, 61, 61, .2);
+        }
+        .average-grid-col{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(200, 200, 61, .15);
+            border: 1px solid rgba(200, 200, 61, .2);
+        }
+        .good-grid-col{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(63, 200, 61, .15);
+            border: 1px solid rgba(63, 200, 61, .2);
+        }
+        .morning-shift-grid-col{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(61, 195, 200, .15);
+            border: 1px solid rgba(61, 195, 200, .2);
+        }
+        .evening-shift-grid-col{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(61, 80, 200, .15);
+            border: 1px solid rgba(61, 80, 200, .2);
+        }
+    </style>
+
+{{end}}
+
+
+{{define "content"}}
+    <div class="container">
+        <p class="h1">Отчёт по заявкам за сегодня </p>
+    </div>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-2 themed-grid-col">Фамилия</div>
+            <div class="col-2 themed-grid-col">Списано</div>
+            <div class="col-2 themed-grid-col">Заявок</div>
+            <div class="col-2 themed-grid-col">Закрытых</div>
+            <div class="col-2 themed-grid-col">Открытых</div>
+        </div>
+        {{range $prodRow := .prodData}}
+            <div class="row{{if $prodRow.LastInGroup}} mb-3{{- end}}">
+                <div class="col-2 {{$prodRow.WorkShiftColor}}">{{$prodRow.LastName}}</div>
+                <div class="col-2 {{$prodRow.TimeAccountedColor}}">{{$prodRow.TimeAccounted}} мин.</div>
+                <div class="col-2 themed-grid-col">{{$prodRow.AllTicketCount}}</div>
+                <div class="col-2 themed-grid-col">{{$prodRow.ClosedTicketCount}}</div>
+                <div class="col-2 themed-grid-col">{{$prodRow.OpenTicketCount}}</div>
+            </div>
+        {{end}}
+    </div>
+    <div class="container">
+        <p>Get data at {{.date}} {{.time}}    Data updated at: {{.updateDateTime}}</p>
+        <p>Легенда:</p>
+        <p>Списано - Количество списанных за сегодня минут</p>
+        <p>Заявок - Общее количество заблокированных заявок</p>
+        <p>Закрытых - Количество закрытых не разблокированных заявок</p>
+        <p>Открытых - Количество заявок, в статусе "Открыта"</p>
+    </div>
+{{end}}
